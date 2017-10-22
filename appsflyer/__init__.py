@@ -32,27 +32,27 @@ class AppsFlyer:
     def partners_report(self, date_from, date_to, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/partners_report/v5' % self.app_id
-        f.args = self.__build_args(date_from, date_from, kwargs)
+        f.args = self.__build_args(date_from, date_to, kwargs)
 
         return requests.get(f.url)
 
     def partners_by_date_report(self, date_from, date_to, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/partners_by_date_report/v5' % self.app_id
-        f.args = self.__build_args(date_from, date_from, kwargs)
+        f.args = self.__build_args(date_from, date_to, kwargs)
 
         return requests.get(f.url)
 
     def daily_report(self, date_from, date_to, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/daily_report/v5' % self.app_id
-        f.args = self.__build_args(date_from, date_from, kwargs)
+        f.args = self.__build_args(date_from, date_to, kwargs)
 
         return requests.get(f.url)
 
     def geo_by_date_report(self, date_from, date_to, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/geo_by_date_report/v5' % self.app_id
-        f.args = self.__build_args(date_from, date_from, kwargs)
+        f.args = self.__build_args(date_from, date_to, kwargs)
 
         return requests.get(f.url)
