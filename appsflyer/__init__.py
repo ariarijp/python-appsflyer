@@ -1,3 +1,5 @@
+from io import StringIO
+
 import requests
 from furl import furl
 
@@ -29,30 +31,54 @@ class AppsFlyer:
 
         return args
 
-    def partners_report(self, date_from, date_to, **kwargs):
+    def __to_df(self, resp):
+        import pandas as df
+
+        if resp.status_code != requests.codes.ok:
+            raise Exception(resp.text)
+
+        return df.read_csv(StringIO(resp.text))
+
+    def partners_report(self, date_from, date_to, as_df=False, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/partners_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
 
-        return requests.get(f.url)
+        if as_df:
+            return self.__to_df(resp)
 
-    def partners_by_date_report(self, date_from, date_to, **kwargs):
+        return resp
+
+    def partners_by_date_report(self, date_from, date_to, as_df=False, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/partners_by_date_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
 
-        return requests.get(f.url)
+        if as_df:
+            return self.__to_df(resp)
 
-    def daily_report(self, date_from, date_to, **kwargs):
+        return resp
+
+    def daily_report(self, date_from, date_to, as_df=False, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/daily_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
 
-        return requests.get(f.url)
+        if as_df:
+            return self.__to_df(resp)
 
-    def geo_by_date_report(self, date_from, date_to, **kwargs):
+        return resp
+
+    def geo_by_date_report(self, date_from, date_to, as_df=False, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/geo_by_date_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
 
-        return requests.get(f.url)
+        if as_df:
+            return self.__to_df(resp)
+
+        return resp
