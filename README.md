@@ -5,7 +5,7 @@ AppsFlyer API client library for Python.
 ## Installation
 
 ```bash
-$ pip install git+https://github.com/ariarijp/python-appsflyer.git
+$ pip install git+https://github.com/ariarijp/python-appsflyer
 ```
 
 ## Usage
