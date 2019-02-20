@@ -28,4 +28,4 @@ MIT
 
 ## Author
 
-[ariarijp](https://github.com/ariarijp)
+[Takuya Arita](https://github.com/ariarijp)
