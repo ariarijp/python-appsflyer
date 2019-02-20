@@ -6,10 +6,22 @@ from furl import furl
 
 class AppsFlyer:
     DEFAULT_ENDPOINT = 'https://hq.appsflyer.com'
-    RAW_DATA_REPORT_ADDTIONAL_FIELDS='install_app_store,match_type,\
-        contributor1_match_type,contributor2_match_type,contributor3_match_type,\
-        device_category,gp_referrer,gp_click_time,gp_install_begin'
-    UNINSTALL_REPORT_ADDTIONAL_FIELDS='gp_referrer,gp_click_time,gp_install_begin'
+    RAW_DATA_REPORT_ADDTIONAL_FIELDS = ','.join([
+        'install_app_store',
+        'match_type',
+        'contributor1_match_type',
+        'contributor2_match_type',
+        'contributor3_match_type',
+        'device_category',
+        'gp_referrer',
+        'gp_click_time',
+        'gp_install_begin',
+    ])
+    UNINSTALL_REPORT_ADDTIONAL_FIELDS = ','.join([
+        'gp_referrer',
+        'gp_click_time',
+        'gp_install_begin',
+    ])
 
     def __init__(self, api_token, app_id):
         self.api_token = api_token
