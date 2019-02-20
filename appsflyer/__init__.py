@@ -6,6 +6,10 @@ from furl import furl
 
 class AppsFlyer:
     DEFAULT_ENDPOINT = 'https://hq.appsflyer.com'
+    RAW_DATA_REPORT_ADDTIONAL_FIELDS='install_app_store,match_type,\
+        contributor1_match_type,contributor2_match_type,contributor3_match_type,\
+        device_category,gp_referrer,gp_click_time,gp_install_begin'
+    UNINSTALL_REPORT_ADDTIONAL_FIELDS='gp_referrer,gp_click_time,gp_install_begin'
 
     def __init__(self, api_token, app_id):
         self.api_token = api_token
@@ -28,6 +32,9 @@ class AppsFlyer:
 
         if 'category' in kwargs:
             args['category'] = kwargs.get('category')
+
+        if 'additional_fields' in kwargs:
+            args['additional_fields'] = kwargs.get('additional_fields')
 
         return args
 
@@ -75,6 +82,51 @@ class AppsFlyer:
     def geo_by_date_report(self, date_from, date_to, as_df=False, **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         f.path = '/export/%s/geo_by_date_report/v5' % self.app_id
+        f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
+
+        if as_df:
+            return self.__to_df(resp)
+
+        return resp
+
+    def installs_report(self, date_from, date_to, as_df=False,
+                        additional_fields=None,
+                        **kwargs):
+        f = furl(self.DEFAULT_ENDPOINT)
+        if additional_fields is None:
+            additional_fields=self.RAW_DATA_REPORT_ADDTIONAL_FIELDS
+        f.path = '/export/%s/installs_report/v5' % self.app_id
+        f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
+
+        if as_df:
+            return self.__to_df(resp)
+
+        return resp
+
+    def in_app_events_report(self, date_from, date_to, as_df=False,
+                        additional_fields=None,
+                        **kwargs):
+        f = furl(self.DEFAULT_ENDPOINT)
+        if additional_fields is None:
+            additional_fields=self.RAW_DATA_REPORT_ADDTIONAL_FIELDS
+        f.path = '/export/%s/in_app_events_report/v5' % self.app_id
+        f.args = self.__build_args(date_from, date_to, kwargs)
+        resp = requests.get(f.url)
+
+        if as_df:
+            return self.__to_df(resp)
+
+        return resp
+
+    def uninstall_events_report(self, date_from, date_to, as_df=False,
+                        additional_fields=None,
+                        **kwargs):
+        f = furl(self.DEFAULT_ENDPOINT)
+        if additional_fields is None:
+            self.UNINSTALL_REPORT_ADDTIONAL_FIELDS
+        f.path = '/export/%s/uninstall_events_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
         resp = requests.get(f.url)
 
