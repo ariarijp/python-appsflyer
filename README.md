@@ -16,9 +16,9 @@ from appsflyer import AppsFlyer
 af = AppsFlyer(api_token='API_TOKEN',
                app_id='APP_ID')
 resp = af.daily_report(date_from='2017-10-20',
-                      date_to='2017-10-20',
-                      timezone='Asia/Tokyo',
-                      category='facebook')
+                       date_to='2017-10-20',
+                       timezone='Asia/Tokyo',
+                       category='facebook')
 print(resp.text)
 ```
 
