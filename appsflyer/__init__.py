@@ -107,7 +107,7 @@ class AppsFlyer:
                         **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         if additional_fields is None:
-            additional_fields = self.RAW_DATA_REPORT_ADDTIONAL_FIELDS
+            kwargs['additional_fields'] = self.RAW_DATA_REPORT_ADDITIONAL_FIELDS
         f.path = '/export/%s/installs_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
         resp = requests.get(f.url)
@@ -122,7 +122,7 @@ class AppsFlyer:
                              **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         if additional_fields is None:
-            additional_fields = self.RAW_DATA_REPORT_ADDTIONAL_FIELDS
+            kwargs['additional_fields'] = self.RAW_DATA_REPORT_ADDITIONAL_FIELDS
         f.path = '/export/%s/in_app_events_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
         resp = requests.get(f.url)
@@ -137,7 +137,7 @@ class AppsFlyer:
                                 **kwargs):
         f = furl(self.DEFAULT_ENDPOINT)
         if additional_fields is None:
-            self.UNINSTALL_REPORT_ADDTIONAL_FIELDS
+            kwargs['additional_fields'] = self.UNINSTALL_REPORT_ADDITIONAL_FIELDS
         f.path = '/export/%s/uninstall_events_report/v5' % self.app_id
         f.args = self.__build_args(date_from, date_to, kwargs)
         resp = requests.get(f.url)
