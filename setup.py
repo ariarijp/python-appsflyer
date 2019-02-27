@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='python-appsflyer',
-    version='0.2.0',
+    version='0.2.1',
     description='AppsFlyer API client library for Python.',
     author='Takuya Arita',
     author_email='takuya.arita@gmail.com',
